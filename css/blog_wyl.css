@@ -3,7 +3,6 @@ html, body {
 	margin: 0;
 	box-sizing: border-box;
 }
-
 button { /* 按钮美化 */
 	width: 100px; /* 宽度 */
 	height: 40px; /* 高度 */
@@ -18,4 +17,17 @@ button { /* 按钮美化 */
 }
 button:hover { /* 鼠标移入按钮范围时改变颜色 */
 	background: #5599FF;
+}
+#cata{
+	position: fixed;
+}
+#cata ul{
+	padding-inline-start: 20px;
+}
+#cata ul a{
+	text-decoration: none;
+	color: #000000;
+}
+#cata ul ul{
+	padding-inline-start: 10px;
 }
