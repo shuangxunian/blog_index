@@ -29,13 +29,13 @@ button {
     /* 字体大小 */
 }
 
-p {
-    text-indent: 34px;
-}
-
 button:hover {
     /* 鼠标移入按钮范围时改变颜色 */
     background: #5599FF;
+}
+
+p {
+    text-indent: 34px;
 }
 
 #cata {
