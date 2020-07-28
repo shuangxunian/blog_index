@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>端口可以用6666吗</title>
+    <link rel="stylesheet" href="css/blog_wyl.css">
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <table width="100%" border="0" cellspacing="0px">
+        <!--可以这么理解，一共四行七列，头、隔断、内容、版权各一行
+            左右两个边框、内容目录各一列，内容与目录间隔一列、内容左右留白两列
+            对照看colspan应该就能看懂-->
+        <tr>
+            <td colspan="1" style="background-color:#fff;height: 50px;"></td>
+            <td colspan="2" style="background-color:#fff;height: 50px;">
+                <!--返回上一页的链接-->
+                <a href="http://nev.wangyuelin.xyz/#/Message">
+                    <button>返回上一页</button>
+                </a>
+            </td>
+            <td colspan="3" style="background-color:#fff;height: 50px;" align="right">
+                <!--主页-->
+                <a href="http://www.wangyuelin.xyz">
+                    <button>进入主站</button>
+                </a>
+            </td>
+            <td colspan="1" style="background-color:#fff;height: 50px;"></td>
+        </tr>
+
+        <tr>
+            <td colspan="7" style="background-color:#eeeeee;height: 50px;"></td>
+        </tr>
+        <tr>
+            <td style="background-color:#eeeeee;width:10%;vertical-align:top;"></td>
+            <!--文章-->
+            <td style="background-color:#fff;width:5%;vertical-align:top;"></td>
+            <td style="background-color:#fff;width:50%;vertical-align:top;">
+
+                <br>
+                <h1>&nbsp;&nbsp;&nbsp;&nbsp;端口可以用6666吗</h1>
+                <hr>
+
+                <h3 id="00">起因</h3>
+                <p>在搭建微服务分布式配置中心 Spring Cloud Config 时，如果将端口设置为 6000，总是访问不成功，像下面这样：</p>
+                <img src="https://api2.mubu.com/v3/document_image/d26b4f6c-f95d-4937-bb02-a5c3e142de3d-3807603.jpg" style="width: 600px;">
+                <p>如果换成 Tomcat 默认的 8080 就可以访问了。</p>
+                <p>其实不止 6000，如果你配置成 6666 ，也是无法访问成功的！</p>
+
+                <h3 id="01">分析</h3>
+                <p>刚入行或者经验欠缺的小伙伴应该很容易遇到这个问题，今天就来和大家稍微说一说这个问题。</p>
+                <p>首先，当我们将项目的端口设置为 6000 之后，并非仅仅只有 Chrome 无法访问，Firefox、Safari 也是无法访问的，反而是经常被大家忽略的坐在角落的 IE/Edge 这对难兄难弟可以访问！看看 Safari 访问 6000 端口怎么说：</p>
+                <img src="https://api2.mubu.com/v3/document_image/e476dbe5-9f64-4380-bbd6-e56a24e879b4-3807603.jpg" style="width: 600px;">
+                <p>再看看 Firefox 访问 6000 端口怎么说：</p>
+                <img src="https://api2.mubu.com/v3/document_image/8ce541f5-1d06-4c3f-bae0-8990dda6a54b-3807603.jpg" style="width: 600px;">
+                <p>但是 Edge 就可以访问，如下：</p>
+                <img src="https://api2.mubu.com/v3/document_image/f7235345-e369-4f22-bba1-b67379c49f0c-3807603.jpg" style="width: 600px;">
+                <p>看到这里，大家首先可以确认出现这个问题，和你的代码没有关系！是不是可以松一口气了！</p>
+                <p>这个问题实际上是由 Chrome 默认的非安全端口限制导致的，除了上文说的 6000， 还有其他端口也无法在 Chrome 、Firefox 以及 Safari 中访问（具体端口见文末列表）。</p>
+                <p>这些无法访问的端口大部分都是小于 1024，小于 1024 的端口大家应该会很少使用， 基本上不会在这个上面栽跟头。大于 1024 的端口也并非每一个都可以使用，这才是容易犯错的地方。</p>
+
+                <h3 id="02">解决</h3>
+                <p>那么问题要怎么解决呢？两个思路：</p>
+                <ul>
+                    <li>修改项目端口（推荐）</li>
+                    <li>修改浏览器配置，使之允许访问非安全端口</li>
+                </ul>
+                <p>推荐大家使用第一种方案，省事！</p>
+                <p>如果非要使用第二种方案：</p>
+                <p>Chrome 修改办法为：右键单击Chrome快捷方式 -> 目标 -> 末尾添加参数：--explicitly-allowed-ports=6000</p>
+                <img src="https://api2.mubu.com/v3/document_image/2c1968ee-f09c-4e73-aebf-b6c47d3adcb8-3807603.jpg" style="width: 422px;">
+                <p>Firefox 修改办法为浏览器地址栏输入 about:config 打开配置页面，然后搜索 network.security.ports.banned.override ，将其值设为 6000 即可(如果没有则右键单击新建即可)。</p>
+                <img src="https://api2.mubu.com/v3/document_image/cd6095d6-2493-42fa-bfe0-27d39b070d9e-3807603.jpg" style="width: 600px;">
+                <p>受限端口列表：</p>
+                <img src="https://api2.mubu.com/v3/document_image/127189cf-c8f3-46c0-8336-ca3dd8500fc4-3807603.jpg" style="width: 640px;">
+
+                <h3 id="03">来源</h3>
+                <p>文章整理自江南一点雨，如果您对全栈/java感兴趣/想学习建议微信公众号关注这位大佬，笔记写的很不错。</p>
+                <br><br><br>
+            </td>
+            <td style="background-color:#fff;width:5%;vertical-align:top;"></td>
+            <td style="background-color:#eeeeee;width:3%;vertical-align:top;"></td>
+            <td style="background-color:#eeeeee;width:17%;vertical-align:top;">
+                <div id="cata">
+                    <br>目录<br>
+                    <hr>
+                    <ul>
+                        <b><li><a href="#00">起因</a></li></b>
+                        <b><li><a href="#01">分析</a></li></b>
+                        <b><li><a href="#02">解决</a></li></b>
+                        <b><li><a href="#03">来源</a></li></b>
+                    </ul>
+                </div>
+            </td>
+            <td style="background-color:#eeeeee;width:10%;vertical-align:top;"></td>
+        </tr>
+        <tr>
+            <!--备案-->
+            <td colspan="7" style="background-color:#eeeeee;text-align:center;height: 50px;">
+                <h5>
+                    Made by <a href="http://nev.wangyuelin.xyz">YuelinWang.</a>
+                    <a href="http://www.beian.miit.gov.cn/"> | 黑ICP备20002479号</a>
+                </h5>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
