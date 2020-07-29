@@ -38,6 +38,29 @@ p {
     text-indent: 34px;
 }
 
+h5 {
+    margin-block-end: 1em;
+}
+
+#data {
+    height: 20px;
+    width: 100%;
+}
+
+#data div {
+    height: 20px;
+    width: 150px;
+    float: right;
+}
+
+#data div p {
+    font-family: "宋体", "仿宋", sans-serif;
+    font-weight: lighter;
+    color: silver;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
 #cata {
     height: auto;
     width: 17%;
