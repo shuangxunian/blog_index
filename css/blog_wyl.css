@@ -42,6 +42,15 @@ h5 {
     margin-block-end: 1em;
 }
 
+.clearfix:after {
+    /*清除浮动*/
+    content: '.';
+    clear: both;
+    display: block;
+    visibility: hidden;
+    height: 0px;
+}
+
 #data {
     height: 20px;
     width: 100%;
@@ -82,4 +91,8 @@ h5 {
 
 #cata ul ul {
     padding-inline-start: 10px;
+}
+
+#cata ul :hover {
+    background-color: rgb(216, 214, 214);
 }
