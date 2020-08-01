@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>前端知识点总结</title>
+    <link rel="shortcut icon" href="http://nev.wangyuelin.xyz/static/img/favicon.ico" />
+    <link rel="stylesheet" href="css/blog_wyl.css">
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <table width="100%" border="0" cellspacing="0px">
+        <!--可以这么理解，一共四行七列，头、隔断、内容、版权各一行
+            左右两个边框、内容目录各一列，内容与目录间隔一列、内容左右留白两列
+            对照看colspan应该就能看懂-->
+        <tr>
+            <td colspan="1" style="background-color:#fff;height: 50px;"></td>
+            <td colspan="2" style="background-color:#fff;height: 50px;">
+                <!--返回上一页的链接-->
+                <a href="http://nev.wangyuelin.xyz/#/Message">
+                    <button>返回上一页</button>
+                </a>
+            </td>
+            <td colspan="3" style="background-color:#fff;height: 50px;" align="right">
+                <!--主页-->
+                <a href="http://www.wangyuelin.xyz">
+                    <button>进入主站</button>
+                </a>
+            </td>
+            <td colspan="1" style="background-color:#fff;height: 50px;"></td>
+        </tr>
+
+
+        <tr>
+            <td colspan="7" style="background-color:#eeeeee;height: 50px;"></td>
+        </tr>
+
+        <tr>
+            <td style="background-color:#eeeeee;width:10%;vertical-align:top;"></td>
+            <td style="background-color:#fff;width:5%;vertical-align:top;"></td>
+            <!--文章-->
+            <td id="content_wyl" style="background-color:#fff;width:50%;vertical-align:top;">
+                <br>
+                <h1>&nbsp;&nbsp;&nbsp;&nbsp;前端知识点总结</h1>
+                <hr>
+                <div id="data">
+                    <div>
+                        <p>2020年08月01日</p>
+                    </div>
+                </div>
+
+                <p><b id="00">生命周期函数面试题</b></p>
+                <ul>
+                    <li><a href="">什么是 vue 生命周期</a></li>
+                    <li><a href="">vue生命周期的作用是什么</a></li>
+                    <li><a href="">第一次页面加载会触发哪几个钩子</a></li>
+                    <li><a href="">简述每个周期具体适合哪些场景</a></li>
+                    <li><a href="">created和mounted的区别</a></li>
+                    <li><a href="">vue获取数据在哪个周期函数</a></li>
+                    <li><a href="">请详细说下你对vue生命周期的理解？</a></li>
+                </ul>
+
+                <p><b id="01">vue路由面试题</b></p>
+                <ul>
+                    <li><a href="">mvvm 框架是什么？</a></li>
+                    <li><a href="">vue-router 是什么?它有哪些组件</a></li>
+                    <li><a href="">active-class 是哪个组件的属性？</a></li>
+                    <li><a href="">怎么定义 vue-router 的动态路由? 怎么获取传过来的值</a></li>
+                    <li><a href="">vue-router 有哪几种导航钩子?</a></li>
+                    <li><a href="">route和router 的区别</a></li>
+                    <li><a href="">vue-router响应路由参数的变化</a></li>
+                    <li><a href="">vue-router传参</a></li>
+                    <li><a href="">vue-router的两种模式</a></li>
+                    <li><a href="">vue-router实现路由懒加载（ 动态加载路由 ）</a></li>
+                </ul>
+
+                <p><b id="02">vue常见面试题</b></p>
+                <ul>
+                    <li><a href="">vue优点</a></li>
+                    <li><a href="">vue父组件向子组件传递数据？</a></li>
+                    <li><a href="">子组件像父组件传递事件</a></li>
+                    <li><a href="">v-show和v-if指令的共同点和不同点</a></li>
+                    <li><a href="">如何让CSS只在当前组件中起作用</a></li>
+                    <li><a href="">如何获取dom</a></li>
+                    <li><a href="">说出几种vue当中的指令和它的用法？</a></li>
+                    <li><a href="">vue-loader是什么？使用它的用途有哪些？</a></li>
+                    <li><a href="">为什么使用key</a></li>
+                    <li><a href="">axios及安装</a></li>
+                    <li><a href="">axios解决跨域</a></li>
+                    <li><a href="">v-modal的使用</a></li>
+                    <li><a href="">scss的安装以及使用</a></li>
+                    <li><a href="">请说出vue.cli项目中src目录每个文件夹和文件的用法？</a></li>
+                    <li><a href="">分别简述computed和watch的使用场景</a></li>
+                    <li><a href="">v-on可以监听多个方法吗</a></li>
+                    <li><a href="">$nextTick的使用</a></li>
+                    <li><a href="">vue组件中data为什么必须是一个函数</a></li>
+                    <li><a href="">vue事件对象的使用</a></li>
+                    <li><a href="">组件间的通信</a></li>
+                    <li><a href="">渐进式框架的理解</a></li>
+                    <li><a href="">Vue中双向数据绑定是如何实现的</a></li>
+                    <li><a href="">单页面应用和多页面应用区别及优缺点</a></li>
+                    <li><a href="">vue中过滤器有什么作用及详解</a></li>
+                    <li><a href="">v-if和v-for的优先级</a></li>
+                    <li><a href="">assets和static的区别</a></li>
+                    <li><a href="">列举常用的指令</a></li>
+                    <li><a href="">vue常用的修饰符</a></li>
+                    <li><a href="">数组更新检测</a></li>
+                    <li><a href="">Vue.set视图更新</a></li>
+                    <li><a href="">自定义指令详解</a></li>
+                    <li><a href="">vue的两个核心点</a></li>
+                    <li><a href="">vue和jQuery的区别</a></li>
+                    <li><a href="">引进组件的步骤</a></li>
+                    <li><a href="">Vue-cli打包命令是什么？打包后悔导致路径问题，应该在哪里修改</a></li>
+                    <li><a href="">三大框架的对比</a></li>
+                    <li><a href="">跨组件双向数据绑定</a></li>
+                    <li><a href="">delete和Vue.delete删除数组的区别</a></li>
+                    <li><a href="">SPA首屏加载慢如何解决</a></li>
+                    <li><a href="">Vue-router跳转和location.href有什么区别</a></li>
+                    <li><a href="">vue slot</a></li>
+                    <li><a href="">你们vue项目是打包了一个js文件，一个css文件，还是有多个文件？</a></li>
+                    <li><a href="">vue遇到的坑，如何解决的？</a></li>
+                    <li><a href="">Vue里面router-link在电脑上有用，在安卓上没反应怎么解决？</a></li>
+                    <li><a href="">Vue2中注册在router-link上事件无效解决方法</a></li>
+                    <li><a href="">RouterLink在IE和Firefox中不起作用（路由不跳转）的问题</a></li>
+                    <li><a href="">axios的特点有哪些</a></li>
+                    <li><a href="">请说下封装 vue 组件的过程？</a></li>
+                    <li><a href="">vue 各种组件通信方法（父子 子父 兄弟 爷孙 毫无关系的组件）</a></li>
+                    <li><a href="">params和query的区别</a></li>
+                    <li><a href="">vue mock数据</a></li>
+                    <li><a href="">vue封装通用组件</a></li>
+                    <li><a href="">vue初始化页面闪动问题</a></li>
+                    <li><a href="">vue禁止弹窗后的屏幕滚动</a></li>
+                    <li><a href="">vue更新数组时触发视图更新的方法</a></li>
+                    <li><a href="">vue常用的UI组件库</a></li>
+                    <li><a href="">vue如何引进本地背景图片</a></li>
+                    <li><a href="">vue如何引进sass</a></li>
+                    <li><a href="">vue修改打包后静态资源路径的修改</a></li>
+                </ul>
+
+                <p><b id="03">Vuex常见面试题</b></p>
+                <ul>
+                    <li><a href="">vuex是什么？怎么使用？哪种功能场景使用它？</a></li>
+                    <li><a href="">vuex有哪几种属性</a></li>
+                    <li><a href="">不使用Vuex会带来什么问题</a></li>
+                    <li><a href="">Vue.js中ajax请求代码应该写在组件的methods中还是vuex的actions中？</a></li>
+                    <li><a href="">vuex一个例子方法</a></li>
+                    <li><a href="">Vuex中如何异步修改状态</a></li>
+                    <li><a href="">Vuex中actions和mutations的区别</a></li>
+                </ul>
+
+                <p><b id="04">Vue项目实战</b></p>
+                <ul>
+                    <li><a href="">顶部悬停效果</a></li>
+                    <li><a href="">电话本列表效果（ 右边字母分类 上下滑动 旁边字母显示高亮）</a></li>
+                    <li><a href="">vue做代理</a></li>
+                    <li><a href="">Vue路由切换时的左滑和右滑效果示例</a></li>
+                </ul>
+
+                <p><b id="05">ES6新增方法面试题</b></p>
+                <ul>
+                    <li><a href="">let const var比较</a></li>
+                    <li><a href="">反引号（`）标识</a></li>
+                    <li><a href="">函数默认参数</a></li>
+                    <li><a href="">箭头函数</a></li>
+                    <li><a href="">属性简写</a></li>
+                    <li><a href="">方法简写</a></li>
+                    <li><a href="">Object.keys()方法，获取对象的所有属性名或方法名</a></li>
+                    <li><a href="">Object.assign ()原对象的属性和方法都合并到了目标对象</a></li>
+                    <li><a href="">for...of 循环</a></li>
+                    <li><a href="">import和export</a></li>
+                    <li><a href="">Promise对象</a></li>
+                    <li><a href="">解构赋值</a></li>
+                    <li><a href="">set数据结构（可用于快速去重）</a></li>
+                    <li><a href="">Spread Operator 展开运算符(...)</a></li>
+                    <li><a href="">字符串新增方法</a></li>
+                </ul>
+
+                <p><b id="06">ES6数组面试题</b></p>
+                <ul>
+                    <li><a href="">forEach()</a></li>
+                    <li><a href="">map()</a></li>
+                    <li><a href="">filter()</a></li>
+                    <li><a href="">reduce()</a></li>
+                    <li><a href="">some()</a></li>
+                    <li><a href="">every()</a></li>
+                    <li><a href="">all()方法</a></li>
+                </ul>
+
+                <p><b id="07">ES6编程题</b></p>
+                <ul>
+                    <li><a href="">使用解构，实现两个变量的值的交换</a></li>
+                    <li><a href="">利用数组推导，计算出数组 [1,2,3,4] 每一个元素的平方并组成新的数组。</a></li>
+                    <li><a href="">使用ES6改js</a></li>
+                </ul>
+
+                <p><b id="08">react生命周期面试题</b></p>
+                <ul>
+                    <li><a href="">react 生命周期函数</a></li>
+                    <li><a href="">react生命周期中，最适合与服务端进行数据交互的是哪个函数</a></li>
+                    <li><a href="">运行阶段生命周期调用顺序</a></li>
+                    <li><a href="">shouldComponentUpdate 是做什么的，（react 性能优化是哪个周期函数？）</a></li>
+                    <li><a href="">指出(组件)生命周期方法的不同</a></li>
+                </ul>
+
+                <p><b id="09">react 基础面试题</b></p>
+                <ul>
+                    <li><a href="">React 中 keys 的作用是什么？</a></li>
+                    <li><a href="">React 中 refs 的作用是什么？</a></li>
+                    <li><a href="">React 中有三种构建组件的方式</a></li>
+                    <li><a href="">调用 setState 之后发生了什么？</a></li>
+                    <li><a href="">react diff 原理（常考，大厂必考）</a></li>
+                    <li><a href="">为什么建议传递给 setState 的参数是一个 callback 而不是一个对象</a></li>
+                    <li><a href="">除了在构造函数中绑定 this，还有其它方式吗</a></li>
+                    <li><a href="">setState第二个参数的作用</a></li>
+                    <li><a href="">(在构造函数中)调用 super(props) 的目的是什么</a></li>
+                    <li><a href="">简述 flux 思想</a></li>
+                    <li><a href="">在 React 当中 Element 和 Component 有何区别？</a></li>
+                    <li><a href="">描述事件在 React 中的处理方式。</a></li>
+                    <li><a href="">createElement 和 cloneElement 有什么区别？</a></li>
+                    <li><a href="">如何告诉 React 它应该编译生产环境版本？</a></li>
+                    <li><a href="">Controlled Component 与 Uncontrolled Component 之间的区别是什么</a></li>
+                </ul>
+
+                <p><b id="0A">react组件面试题</b></p>
+                <ul>
+                    <li><a href="">展示组件(Presentational component)和容器组件(Container component)之间有何不同</a></li>
+                    <li><a href="">类组件(Class component)和函数式组件(Functional component)之间有何不同</a></li>
+                    <li><a href="">(组件的)状态(state)和属性(props)之间有何不同</a></li>
+                    <li><a href="">何为受控组件(controlled component)</a></li>
+                    <li><a href="">何为高阶组件(higher order component)</a></li>
+                    <li><a href="">应该在 React 组件的何处发起 Ajax 请求</a></li>
+                    <li><a href="">react中组件传值</a></li>
+                    <li><a href="">什么时候在功能组件( Class Component )上使用类组件( Functional Component )？</a></li>
+                    <li><a href="">受控组件( controlled component )与不受控制的组件( uncontrolled component )有什么区别？</a></li>
+                    <li><a href="">react 组件的划分业务组件技术组件？</a></li>
+                </ul>
+
+                <p><b id="0B">redux面试题</b></p>
+                <ul>
+                    <li><a href="">redux中间件</a></li>
+                    <li><a href="">redux有什么缺点</a></li>
+                    <li><a href="">了解 redux 么，说一下redux吧</a></li>
+                </ul>
+
+                <p><b id="0C">react性能比较面试题</b></p>
+                <ul>
+                    <li><a href="">vue和react的区别</a></li>
+                    <li><a href="">react性能优化的方案</a></li>
+                    <li><a href="">React 项目用过什么脚手架</a></li>
+                    <li><a href="">介绍一下webpack</a></li>
+                    <li><a href="">为什么我们需要使用React提供的ChildrenAPI而不是JavaScript的map？</a></li>
+                </ul>
+
+                <p><b id="0D">js面试题</b></p>
+                <ul>
+                    <li><a href="">简述同步和异步的区别</a></li>
+                    <li><a href="">怎么添加、移除、复制、创建、和查找节点</a></li>
+                    <li><a href="">实现一个函数clone 可以对Javascript中的五种主要数据类型（Number、string、Object、Array、Boolean）进行复制</a></li>
+                    <li><a href="">如何消除一个数组里面重复的元素</a></li>
+                    <li><a href="">写一个返回闭包的函数</a></li>
+                    <li><a href="">使用递归完成1到100的累加</a></li>
+                    <li><a href="">Javascript有哪几种数据类型</a></li>
+                    <li><a href="">如何判断数据类型</a></li>
+                    <li><a href="">console.log(1+'2')和console.log(1-'2')的打印结果</a></li>
+                    <li><a href="">Js的事件委托是什么，原理是什么</a></li>
+                    <li><a href="">如何改变函数内部的this指针的指向</a></li>
+                    <li><a href="">列举几种解决跨域问题的方式，且说明原理</a></li>
+                    <li><a href="">谈谈垃圾回收机制的方式及内存管理</a></li>
+                    <li><a href="">写一个function ，清除字符串前后的空格</a></li>
+                    <li><a href="">js实现继承的方法有哪些</a></li>
+                    <li><a href="">判断一个变量是否是数组，有哪些办法</a></li>
+                    <li><a href="">let ，const ，var 有什么区别</a></li>
+                    <li><a href="">箭头函数与普通函数有什么区别</a></li>
+                    <li><a href="">随机取1-10之间的整数</a></li>
+                    <li><a href="">new操作符具体干了什么</a></li>
+                    <li><a href="">Ajax原理</a></li>
+                    <li><a href="">模块化开发怎么做</a></li>
+                    <li><a href="">异步加载Js的方式有哪些</a></li>
+                    <li><a href="">xml和json的区别</a></li>
+                    <li><a href="">webpack如何实现打包的</a></li>
+                    <li><a href="">常见web安全及防护原理</a></li>
+                    <li><a href="">用过哪些设计模式</a></li>
+                    <li><a href="">为什么要同源限制</a></li>
+                    <li><a href="">offsetWidth/offsetHeight,clientWidth/clientHeight与scrollWidth/scrollHeight的区别</a></li>
+                    <li><a href="">javascript有哪些方法定义对象</a></li>
+                    <li><a href="">说说你对promise的了解</a></li>
+                    <li><a href="">谈谈你对AMD、CMD的理解</a></li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                </ul>
+
+                <p><b id="09"></b></p>
+                <ul>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                </ul>
+
+                <p><b id="09"></b></p>
+                <ul>
+                    <li>
+                        <a href=""></a>
+                    </li>
+                </ul>
+                <br><br><br>
+            </td>
+            <td style="background-color:#fff;width:5%;vertical-align:top;"></td>
+            <td style="background-color:#eeeeee;width:3%;vertical-align:top;"></td>
+            <td style="background-color:#eeeeee;width:17%;vertical-align:top;">
+                <div id="cata">
+                    <br>目录<br>
+                    <hr>
+                    <ul>
+                        <b><li><a href="#00"  >小标题</a></li></b>
+                    </ul>
+                </div>
+            </td>
+            <td style="background-color:#eeeeee;width:10%;vertical-align:top;"></td>
+        </tr>
+        <tr>
+            <!--备案-->
+            <td colspan="7" style="background-color:#eeeeee;text-align:center;height: 50px;">
+                <h5>
+                    Made by <a href="http://nev.wangyuelin.xyz">YuelinWang.</a>
+                    <a href="http://www.beian.miit.gov.cn/"> | 黑ICP备20002479号</a><br><br>
+                    <a href="https://github.com/YuelinWang/blog_index" style="text-decoration: none;color: #000000;">想使用此模板请点此</a>
+                </h5>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

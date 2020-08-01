@@ -51,6 +51,9 @@ h5 {
     height: 0px;
 }
 
+
+/*日期部分*/
+
 #data {
     height: 20px;
     width: 100%;
@@ -69,6 +72,9 @@ h5 {
     margin-block-start: 0em;
     margin-block-end: 0em;
 }
+
+
+/*目录部分*/
 
 #cata {
     height: auto;
@@ -94,5 +100,17 @@ h5 {
 }
 
 #cata ul :hover {
+    background-color: rgb(216, 214, 214);
+}
+
+
+/*内容部分*/
+
+#content_wyl ul li a {
+    text-decoration: none;
+    color: #000000;
+}
+
+#content_wyl ul li :hover {
     background-color: rgb(216, 214, 214);
 }
