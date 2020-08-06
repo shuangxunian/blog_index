@@ -114,3 +114,16 @@ h5 {
 #content_wyl ul li :hover {
     background-color: rgb(216, 214, 214);
 }
+
+
+/*返回顶部部分*/
+
+.back {
+    position: fixed !important;
+    right: 20px;
+    bottom: 20px;
+}
+
+.hide {
+    display: none !important;
+}
