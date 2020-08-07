@@ -90,6 +90,10 @@ h5 {
     padding-inline-start: 20px;
 }
 
+#cata ul :hover {
+    background-color: rgb(216, 214, 214);
+}
+
 #cata ul a {
     text-decoration: none;
     color: #000000;
@@ -97,10 +101,6 @@ h5 {
 
 #cata ul ul {
     padding-inline-start: 10px;
-}
-
-#cata ul :hover {
-    background-color: rgb(216, 214, 214);
 }
 
 
@@ -113,17 +113,4 @@ h5 {
 
 #content_wyl ul li :hover {
     background-color: rgb(216, 214, 214);
-}
-
-
-/*返回顶部部分*/
-
-.back {
-    position: fixed !important;
-    right: 20px;
-    bottom: 20px;
-}
-
-.hide {
-    display: none !important;
 }
