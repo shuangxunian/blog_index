@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>var、let、const 区别</title>
+    <link rel="stylesheet" href="css/blog_wyl.css">
+    <link rel="shortcut icon" href="http://nev.wangyuelin.xyz/static/img/favicon.ico" />
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+    <table width="100%" border="0" cellspacing="0px">
+        <!--可以这么理解，一共四行七列，头、隔断、内容、版权各一行
+            左右两个边框、内容目录各一列，内容与目录间隔一列、内容左右留白两列
+            对照看colspan应该就能看懂-->
+        <tr>
+            <td colspan="1" style="background-color:#fff;height: 50px;"></td>
+            <td colspan="2" style="background-color:#fff;height: 50px;">
+                <!--返回上一页的链接-->
+                <a href="http://nev.wangyuelin.xyz/#/Message">
+                    <button>返回上一页</button>
+                </a>
+            </td>
+            <td colspan="3" style="background-color:#fff;height: 50px;" align="right">
+                <!--主页-->
+                <a href="http://www.wangyuelin.xyz">
+                    <button>进入主站</button>
+                </a>
+            </td>
+            <td colspan="1" style="background-color:#fff;height: 50px;"></td>
+        </tr>
+
+
+        <tr>
+            <td colspan="7" style="background-color:#eeeeee;height: 50px;"></td>
+        </tr>
+
+        <tr>
+            <td style="background-color:#eeeeee;width:10%;vertical-align:top;"></td>
+            <td style="background-color:#fff;width:5%;vertical-align:top;"></td>
+            <!--文章-->
+            <td style="background-color:#fff;width:50%;vertical-align:top;">
+                <br>
+                <h1>&nbsp;&nbsp;&nbsp;&nbsp;var、let、const 区别</h1>
+                <hr>
+                <div id="data">
+                    <div>
+                        <p>2020年8月11日</p>
+                    </div>
+                </div>
+
+                <h3 id="00">一句话概括</h3>
+                <p>最明显的区别是var声明的变量是全局或者整个函数块的，而let,const声明的变量是块级的变量，var声明的变量存在变量提升，let,const不存在，let声明的变量允许重新赋值，const不允许，</p>
+
+                <h3 id="01">var存在的问题</h3>
+                <p><b>1.没有块级作用域</b></p>
+                <p>请看这样一条规则：在JS函数中的var声明，其作用域是函数体的全部。具体看下图例子：</p>
+                <img src="https://api2.mubu.com/v3/document_image/7121737c-8a02-4260-ba3b-266e5413d103-3807603.jpg">
+                <p>明明已经跳出for循环了，却还可以访问到for循环内定义的变量a，甚至连i都可以被放访问到，通常情况下会觉得很难受。输出如下图：</p>
+                <img src="https://api2.mubu.com/v3/document_image/c1704dda-4e0c-45b2-8abc-dd96e177eb64-3807603.jpg">
+
+                <p><b>2.循环内变量过度使用</b></p>
+                <p>请看这段代码：</p>
+                <img src="https://api2.mubu.com/v3/document_image/a36fb92d-6052-4e4f-8ab2-7e535a36c397-3807603.jpg">
+                <p>它的输出是：</p>
+                <img src="https://api2.mubu.com/v3/document_image/79cf234f-1b0b-42bc-b249-6c06354acbef-3807603.jpg">
+                <p>导致这种情况发生的原因是环本身及三次 timeout 回调均共享唯一的变量 **i 。当循环结束执行时，i 的值为3。所以当第一个 timeout 执行时，调用的 i 当让也为 3 了。</p>
+                <p>为了解决这个问题，ES6中引入了let，使用let的时候，必须声明 'use strict' 。</p>
+
+                <h3 id="02">let</h3>
+                <p>可以简单的将let理解成更完美的var。</p>
+                <p><b>let声明的变量拥有块级作用域。</b>也就是说用let声明的变量的作用域只是外层块，而不是整个外层函数。let 声明仍然保留了提升特性，但不会盲目提升，在示例一中，通过将var替换为let可以快速修复问题，如果你处处使用let进行声明，就不会遇到类似的bug。</p>
+                <p><b>let声明的全局变量不是全局对象的属性。</b>这就意味着，你不可以通过window.变量名的方式访问这些变量。它们只存在于一个不可见的块的作用域中，这个块理论上是Web页面中运行的所有JS代码的外层块。</p>
+                <p><b>形如for (let x...)的循环在每次迭代时都为x创建新的绑定。</b>这是一个非常微妙的区别，拿示例二来说，如果一个for (let...)循环执行多次并且循环保持了一个闭包，那么每个闭包将捕捉一个循环变量的不同值作为副本，而不是所有闭包都捕捉循环变量的同一个值。</p>
+                <p>所以示例二中，也以通过将var替换为let修复bug。 这种情况适用于现有的三种循环方式：for-of、for-in、以及传统的用分号分隔的类C循环。</p>
+                <p><b>用let重定义变量会抛出一个语法错误（SyntaxError）。</b>这里用代码做示范：</p>
+                <img src="https://api2.mubu.com/v3/document_image/a12c64cb-ffea-4635-9b06-f1dfbeb538bd-3807603.jpg">
+                <p>上述写法浏览器会报错，因为重复定义了。</p>
+                <img src="https://api2.mubu.com/v3/document_image/e3eadd8c-1dfa-4d73-9919-c3f5dc6ac59f-3807603.jpg">
+                <p>在这些不同之外，let和var几乎很相似了。举个例子，它们都支持使用逗号分隔声明多重变量，它们也都支持解构特性。</p>
+
+                <h3 id="03">const</h3>
+                <p>ES6引入的第三个声明类关键词：const。</p>
+                <p>一句话说明白，const 就是用来定义常量的！任何不正常的写法都是非法的，如下：</p>
+                <img src="https://api2.mubu.com/v3/document_image/4689f5e3-6fda-4c23-b323-f7296f5c7565-3807603.jpg">
+                <p>可以的原因是：const 定义原始类型的时候，这个变量是不可以改变的；定义引用类型的时候，指的是当前变量的指针不可以更改，与对象内部的值是否更改无关。</p>
+                <br><br><br>
+            </td>
+            <td style="background-color:#fff;width:5%;vertical-align:top;"></td>
+            <td style="background-color:#eeeeee;width:3%;vertical-align:top;"></td>
+            <td style="background-color:#eeeeee;width:17%;vertical-align:top;">
+                <div id="cata">
+                    <br>var、let、const 区别<br>
+                    <hr>
+                    <ul>
+                        <b><li><a href="#00"  >一句话概括</a></li></b>
+                        <b><li><a href="#01"  >var存在的问题</a></li></b>
+                        <b><li><a href="#02"  >let</a></li></b>
+                        <b><li><a href="#03"  >const</a></li></b>
+                    </ul>
+                </div>
+            </td>
+            <td style="background-color:#eeeeee;width:10%;vertical-align:top;"></td>
+        </tr>
+        <tr>
+            <!--备案-->
+            <td colspan="7" style="background-color:#eeeeee;text-align:center;height: 50px;">
+                <h5>
+                    Made by <a href="http://nev.wangyuelin.xyz">YuelinWang.</a>|
+                    <a href="http://www.beian.miit.gov.cn/">  黑ICP备20002479号</a><br><br>
+                    <a href="https://github.com/YuelinWang/blog_index" style="text-decoration: none;color: #000000;">想使用此模板请点此</a> |
+                    <a href="https://github.com/YuelinWang/code/007.js" style="text-decoration: none;color: #000000;">想访问代码请点此</a>
+                </h5>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
