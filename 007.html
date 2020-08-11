@@ -85,6 +85,19 @@
                 <p>一句话说明白，const 就是用来定义常量的！任何不正常的写法都是非法的，如下：</p>
                 <img src="https://api2.mubu.com/v3/document_image/4689f5e3-6fda-4c23-b323-f7296f5c7565-3807603.jpg">
                 <p>可以的原因是：const 定义原始类型的时候，这个变量是不可以改变的；定义引用类型的时候，指的是当前变量的指针不可以更改，与对象内部的值是否更改无关。</p>
+
+                <h3 id="04">暂时性死区</h3>
+                <p>如果在代码块中存在 let 或 const 命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错。如图所示</p>
+                <img src="https://api2.mubu.com/v3/document_image/e908746f-975b-48b4-8621-5d4cf606ff49-3807603.jpg">
+                <p>这段代码的原意是在 if 内定义外部的 tmp 为 'abc'。</p>
+                <p>但现实是，存在全局变量 tmp，但是块级作用域内 let 又声明了一个 tmp变量，导致后者被绑定在这个块级作用域中，所以在 let 声明变量前，对 tmp 赋值就报错了。</p>
+
+                <h3 id="05">参考链接</h3>
+                <p><a href="https://juejin.im/post/6844903704189992973" style="color: #0000005b;">浅谈var、let和const区别</a></p>
+                <p><a href="https://www.jianshu.com/p/4e9cd99ecbf5" style="color: #0000005b;">var、let、const 区别？</a></p>
+                <p><a href="https://wangdoc.com/javascript/basic/grammar.html" style="color: #0000005b;">JavaScript 的基本语法</a></p>
+                <p><a href="https://wangdoc.com/es6/let.html" style="color: #0000005b;">let 和 const 命令</a></p>
+
                 <br><br><br>
             </td>
             <td style="background-color:#fff;width:5%;vertical-align:top;"></td>
@@ -98,6 +111,9 @@
                         <b><li><a href="#01"  >var存在的问题</a></li></b>
                         <b><li><a href="#02"  >let</a></li></b>
                         <b><li><a href="#03"  >const</a></li></b>
+                        <b><li><a href="#04"  >暂时性死区</a></li></b>
+                        <b><li><a href="#05"  >参考链接</a></li></b>
+
                     </ul>
                 </div>
             </td>

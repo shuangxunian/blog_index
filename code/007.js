@@ -37,3 +37,11 @@ const a = { a: 'a' };
 a = { a: 'b' };
 //但是下面这个可以
 a.a = 'b'
+
+
+var tmp = 123;
+
+if (true) {
+    tmp = 'abc'; //报错，Uncaught ReferenceError: tmp is not defined
+    let tmp;
+}
