@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>js的深拷贝和浅拷贝</title>
+    <link rel="stylesheet" href="css/blog_wyl.css">
+    <link rel="shortcut icon" href="http://nev.wangyuelin.xyz/static/img/favicon.ico" />
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+    <table width="100%" border="0" cellspacing="0px">
+        <!--可以这么理解，一共四行七列，头、隔断、内容、版权各一行
+            左右两个边框、内容目录各一列，内容与目录间隔一列、内容左右留白两列
+            对照看colspan应该就能看懂-->
+        <tr>
+            <td colspan="1" style="background-color:#fff;height: 50px;"></td>
+            <td colspan="2" style="background-color:#fff;height: 50px;">
+                <!--返回上一页的链接-->
+                <a href="http://nev.wangyuelin.xyz/#/Message">
+                    <button>返回上一页</button>
+                </a>
+            </td>
+            <td colspan="3" style="background-color:#fff;height: 50px;" align="right">
+                <!--主页-->
+                <a href="http://www.wangyuelin.xyz">
+                    <button>进入主站</button>
+                </a>
+            </td>
+            <td colspan="1" style="background-color:#fff;height: 50px;"></td>
+        </tr>
+
+
+        <tr>
+            <td colspan="7" style="background-color:#eeeeee;height: 50px;"></td>
+        </tr>
+
+        <tr>
+            <td style="background-color:#eeeeee;width:10%;vertical-align:top;"></td>
+            <td style="background-color:#fff;width:5%;vertical-align:top;"></td>
+            <!--文章-->
+            <td style="background-color:#fff;width:50%;vertical-align:top;">
+                <br>
+                <h1>&nbsp;&nbsp;&nbsp;&nbsp;js的深拷贝和浅拷贝</h1>
+                <hr>
+                <div id="data">
+                    <div>
+                        <p>2020年08月12日</p>
+                    </div>
+                </div>
+                <h3 id="00">前言</h3>
+                <p>本文主要讲一下 js 的基本数据类型以及一些堆和栈的知识和什么是深拷贝、什么是浅拷贝、深拷贝与浅拷贝的区别，以及怎么进行深拷贝和怎么进行浅拷贝。</p>
+
+                <h3 id="01">一句话概括</h3>
+                <p>深拷贝是将B对象拷贝到A对象中，包括B里面的子对象；浅拷贝则是将B对象拷贝到A对象中，但不包括B里面的子对象</p>
+
+                <h3 id="02">ECMAScript的数据类型</h3>
+                <p>ES中数据类型主要分为<b>基本数据类型</b>（undefined，boolean，number，string，null）和<b>引用类型</b>（object）。其中：</p>
+                <p><b>基本数据类型</b>存放在栈内存中的简单数据段，数据大小确定，内存空间大小可以分配，是直接按值存放的，所以可以直接访问。</p>
+                <p>但需要注意的是，基本数据类型值不可变。即任何方法都无法更改（或“突变”）一个原始值。对数字和布尔值来说显然如此 —— 改变数字的值本身就说不通，而对字符串来说就不那么明显了，因为字符串看起来像由字符组成的数组，我们期望可以通过指定索引来假改字符串中的字符。实际上，javascript 是禁止这样做的。字符串中所有的方法看上去返回了一个修改后的字符串，实际上返回的是一个新的字符串值。</p>
+                <p>基本数据类型的值是不可变的，动态修改了基本数据类型的值，它的原始值也是不会改变的。如图：</p>
+                <img src="https://api2.mubu.com/v3/document_image/8c23a718-104a-47c5-9fe2-41cac6e8a4fa-3807603.jpg">
+                <p>我们通常情况下都是对一个变量重新赋值，而不是改变基本数据类型的值。就如上述引用所说的那样，在 js 中没有方法是可以改变布尔值和数字的。倒是有很多操作字符串的方法，但是这些方法都是返回一个新的字符串，并没有改变其原有的数据。</p>
+                <p>关于比较要注意的是：基本类型的比较是值的比较，只要它们的值相等就认为他们是相等的，例如：</p>
+                <img src="https://api2.mubu.com/v3/document_image/20b9a1ee-829a-4b53-9f43-cc719d3251ab-3807603.jpg">
+                <p>比较的时候最好使用严格等，因为 == 是会进行类型转换的，比如：</p>
+                <img src="https://api2.mubu.com/v3/document_image/10f93809-c758-4b26-9dab-94e4c16f5889-3807603.jpg">
+                <p>而<b>引用类型</b>（object）是存放在堆内存中的，变量实际上是一个存放在栈内存的指针，这个指针指向堆内存中的地址。每个空间大小不一样，要根据情况开进行特定的分配，例如：</p>
+                <img src="https://api2.mubu.com/v3/document_image/8d7f0f8d-8cd9-49c3-91bb-f68208bd33ec-3807603.jpg">
+                <br><br>
+                <img src="https://api2.mubu.com/v3/document_image/8581cc22-eb5c-4059-b950-1c5b7f915f9b-3807603.jpg">
+                <p>与基本数据类型不同的是，引用类型是可以直接改变其值的，例如：</p>
+                <img src="https://api2.mubu.com/v3/document_image/5755995c-a757-4037-acb4-af7aaa52ec21-3807603.jpg">
+                <p>引用类型的比较是引用的比较，所以每次我们对 js 中的引用类型进行操作的时候，都是操作其对象的引用（保存在栈内存中的指针），所以比较两个引用类型，是看其的引用是否指向同一个对象。例如：</p>
+                <img src="https://api2.mubu.com/v3/document_image/f557862f-21f5-406c-a1fc-576343382e0a-3807603.jpg">
+                <p>虽然变量 a 和变量 b 都是表示一个内容为 1，2，3 的数组，但是其在内存中的位置不一样，也就是说变量 a 和变量 b 指向的不是同一个对象，所以他们是不相等的。如图：</p>
+                <img src="https://api2.mubu.com/v3/document_image/4a97a413-af99-4f52-a449-06b5f773775d-3807603.jpg">
+
+                <h3 id="03">传值与传址</h3>
+                <p>了解了基本数据类型与引用类型的区别之后，我们就应该能明白传值与传址的区别了。在我们进行赋值操作的时候，基本数据类型的赋值（=）是在内存中新开辟一段栈内存，然后再把再将值赋值到新的栈中。例如：</p>
+                <img src="https://api2.mubu.com/v3/document_image/5375ec1f-d2bb-49aa-b69b-5dde99673cca-3807603.jpg">
+                <br><br>
+                <img src="https://api2.mubu.com/v3/document_image/97115a71-77cb-447c-a1b8-5d1b23695479-3807603.jpg">
+                <p>所以说，基本类型的赋值的两个变量是两个独立相互不影响的变量。</p>
+                <p>但是引用类型的赋值是传址。只是改变指针的指向，例如，也就是说引用类型的赋值是对象保存在栈中的地址的赋值，这样的话两个变量就指向同一个对象，因此两者之间操作互相有影响。例如：</p>
+                <img src="https://api2.mubu.com/v3/document_image/776169d2-c142-40c6-9396-da59498150e5-3807603.jpg">
+                <br><br>
+                <img src="https://api2.mubu.com/v3/document_image/2c724ee4-1e31-4eb8-a4fc-33a995c8574c-3807603.jpg">
+
+                <h3 id="04">对象的拷贝</h3>
+                <p>有时，我们需要将一个对象的所有属性，拷贝到另一个对象，可以用下面的方法实现。</p>
+                <img src="https://api2.mubu.com/v3/document_image/27b60e50-0ed3-4797-8835-5f372dbabffc-3807603.jpg">
+                <p>上面这个方法的问题在于，如果遇到存取器定义的属性，会只拷贝值。</p>
+                <img src="https://api2.mubu.com/v3/document_image/2656cd8a-5d34-481d-bcad-e64615d976b4-3807603.jpg">
+                <p>为了解决这个问题，我们可以通过Object.defineProperty方法来拷贝属性。</p>
+                <img src="https://api2.mubu.com/v3/document_image/bf29ea4a-d967-4cf8-afa3-7e9f18eec41d-3807603.jpg">
+                <p>上面代码中，hasOwnProperty那一行用来过滤掉继承的属性，否则可能会报错，因为Object.getOwnPropertyDescriptor读不到继承属性的属性描述对象。</p>
+
+                <h3 id="05">浅拷贝</h3>
+                <p>如刚刚在传值与传址中的例子，其实并算不上浅拷贝，只能算是“引用”，两者的区别请看下图：</p>
+                <img src="https://api2.mubu.com/v3/document_image/77ad0c46-4fc5-4d11-b9e1-eecd919f0fcc-3807603.jpg">
+                <img src="https://api2.mubu.com/v3/document_image/f4dd4b31-4aae-4b58-9c9a-3b0c092183e0-3807603.jpg">
+                <p>先定义个一个原始的对象 obj1，然后使用赋值得到第二个对象 obj2，然后通过浅拷贝，将 obj1 里面的属性都赋值到 obj3 中。也就是说：obj1是原始数据；obj2是赋值操作得到；obj3是浅拷贝得到。</p>
+                <p>然后我们改变 obj2 的 name 属性和 obj3 的 name 属性，可以看到，改变赋值得到的对象 obj2 同时也会改变原始值 obj1，而改变浅拷贝得到的的 obj3 则不会改变原始对象 obj1。这就可以说明赋值得到的对象 obj2 只是将指针改变，其引用的仍然是同一个对象，而浅拷贝得到的的 obj3 则是重新创建了新对象。</p>
+                <p>然而，我们接下来来看一下改变引用类型会是什么情况呢，我又改变了赋值得到的对象 obj2 和浅拷贝得到的 obj3 中的 language 属性的第二个值和第三个值（language 是一个数组，也就是引用类型）。结果见输出，可以看出来，无论是修改赋值得到的对象 obj2 和浅拷贝得到的 obj3 都会改变原始数据。</p>
+                <p>这是因为浅拷贝只复制一层对象的属性，并不包括对象里面的为引用类型的数据。所以就会出现改变浅拷贝得到的 obj3 中的引用类型时，会使原始数据得到改变。</p>
+                <p>深拷贝：将 B 对象拷贝到 A 对象中，包括 B 里面的子对象。</p>
+                <p>浅拷贝：将 B 对象拷贝到 A 对象中，但不包括 B 里面的子对象。</p>
+                <img src="https://api2.mubu.com/v3/document_image/49f35569-8f11-4ffd-a1f6-3738d715f39b-3807603.jpg">
+
+                <h3 id="06">深拷贝</h3>
+                <p>从以上可以看出来，深拷贝是对对象以及对象的所有子对象进行拷贝。深拷贝的思路就是递归调用刚刚的浅拷贝，把所有属于对象的属性类型都遍历赋给另一个对象即可。我们直接来看一下 Zepto 中深拷贝的代码：</p>
+                <img src="https://api2.mubu.com/v3/document_image/c29b7a9e-83a0-48a8-b805-bd00fe9ad82a-3807603.jpg" style="width: 100%;">
+                <img src="https://api2.mubu.com/v3/document_image/6bd0d129-875e-41d7-8f64-8bf127c31b20-3807603.jpg" style="width: 100%;">
+                <p>在 Zepto 中的 $.extend 方法判断的第一个参数传入的是一个布尔值，判断是否进行深拷贝。在 $.extend 方法内部，只有一个形参 target，这个设计真的很巧妙。</p>
+                <p>因为形参只有一个，所以 target 就是传入的第一个参数的值，并在函数内部设置一个变量 args 来接收去除第一个参数的其余参数，如果该值是一个布尔类型的值的话，说明要启用深拷贝，就将 deep 设置为 true，并将 target 赋值为 args 的第一个值（也就是真正的 target）。如果该值不是一个布尔类型的话，那么传入的第一个值仍为 target 不需要进行处理，只需要遍历使用 extend 方法就可以，而在 extend 的内部，是拷贝的过程。</p>
+
+                <h3 id="07">参考链接</h3>
+                <p><a href="https://juejin.im/post/6844903493925371917" style="color: #0000005b;">js 深拷贝 vs 浅拷贝</a></p>
+                <p><a href="https://juejin.im/post/6844903618999500808" style="color: #0000005b;">10分钟了解JS堆、栈以及事件循环的概念</a></p>
+                <p><a href="https://wangdoc.com/javascript/stdlib/attributes.html" style="color: #0000005b;">属性描述对象</a></p>
+                <p><a href="https://www.zhihu.com/question/23031215" style="color: #0000005b;">javascript中的深拷贝和浅拷贝？</a></p>
+
+                <br><br><br>
+            </td>
+            <td style="background-color:#fff;width:5%;vertical-align:top;"></td>
+            <td style="background-color:#eeeeee;width:3%;vertical-align:top;"></td>
+            <td style="background-color:#eeeeee;width:17%;vertical-align:top;">
+                <div id="cata">
+                    <br>目录<br>
+                    <hr>
+                    <ul>
+                        <b><li><a href="#00"  >前言</a></li></b>
+                        <b><li><a href="#01"  >一句话概括</a></li></b>
+                        <b><li><a href="#02"  >ECMAScript的数据类型</a></li></b>
+                        <b><li><a href="#03"  >传值与传址</a></li></b>
+                        <b><li><a href="#04"  >对象的拷贝</a></li></b>
+                        <b><li><a href="#05"  >浅拷贝</a></li></b>
+                        <b><li><a href="#06"  >深拷贝</a></li></b>
+                        <b><li><a href="#07"  >参考链接</a></li></b>
+                    </ul>
+                </div>
+            </td>
+            <td style="background-color:#eeeeee;width:10%;vertical-align:top;"></td>
+        </tr>
+        <tr>
+            <!--备案-->
+            <td colspan="7" style="background-color:#eeeeee;text-align:center;height: 50px;">
+                <h5>
+                    Made by <a href="http://nev.wangyuelin.xyz">YuelinWang.</a>
+                    <a href="http://www.beian.miit.gov.cn/"> | 黑ICP备20002479号</a><br><br>
+                    <a href="https://github.com/YuelinWang/blog_index" style="text-decoration: none;color: #000000;">想使用此模板请点此</a> |
+                    <a href="https://github.com/YuelinWang/blog_index/blob/master/code/008.js" style="text-decoration: none;color: #000000;">想访问代码请点此</a>
+                </h5>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
