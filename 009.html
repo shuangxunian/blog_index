@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>js同步和异步的区别</title>
+    <link rel="stylesheet" href="css/blog_wyl.css">
+    <link rel="shortcut icon" href="http://nev.wangyuelin.xyz/static/img/favicon.ico" />
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+    <table width="100%" border="0" cellspacing="0px">
+        <!--可以这么理解，一共四行七列，头、隔断、内容、版权各一行
+            左右两个边框、内容目录各一列，内容与目录间隔一列、内容左右留白两列
+            对照看colspan应该就能看懂-->
+        <tr>
+            <td colspan="1" style="background-color:#fff;height: 50px;"></td>
+            <td colspan="2" style="background-color:#fff;height: 50px;">
+                <!--返回上一页的链接-->
+                <a href="http://nev.wangyuelin.xyz/#/Message">
+                    <button>返回上一页</button>
+                </a>
+            </td>
+            <td colspan="3" style="background-color:#fff;height: 50px;" align="right">
+                <!--主页-->
+                <a href="http://www.wangyuelin.xyz">
+                    <button>进入主站</button>
+                </a>
+            </td>
+            <td colspan="1" style="background-color:#fff;height: 50px;"></td>
+        </tr>
+
+
+        <tr>
+            <td colspan="7" style="background-color:#eeeeee;height: 50px;"></td>
+        </tr>
+
+        <tr>
+            <td style="background-color:#eeeeee;width:10%;vertical-align:top;"></td>
+            <td style="background-color:#fff;width:5%;vertical-align:top;"></td>
+            <!--文章-->
+            <td style="background-color:#fff;width:50%;vertical-align:top;">
+                <br>
+                <h1>&nbsp;&nbsp;&nbsp;&nbsp;js同步和异步的区别</h1>
+                <hr>
+                <div id="data">
+                    <div>
+                        <p>2020年08月14日</p>
+                    </div>
+                </div>
+                <h3 id="00">单线程是什么</h3>
+                <p>我们常说“JavaScript是单线程的”。所谓单线程，就是指在JS引擎中负责解释和执行JavaScript代码的线程只有一个，一次只能完成一件任务。如果有多个任务，就必须排队，前面一个任务完成，再执行后面一个任务。如果一个任务耗时过长，那么后面的任务就必须一直等待下去，会拖延整个程序。我们不妨叫它主线程。</p>
+                <p>但是实际上还存在其他的线程。例如：处理AJAX请求的线程、处理DOM事件的线程、定时器线程、读写文件的线程(例如在Node.js中)等等。这些线程可能存在于JS引擎之内，也可能存在于JS引擎之外，在此我们不做区分。不妨叫它们工作线程。</p>
+
+                <h3 id="01">同步和异步</h3>
+                <p>"同步模式"就是后一个任务等待前一个任务结束，然后再执行，程序的执行顺序与任务的排列顺序是一致的、同步的。</p>
+                <p>如在函数A返回的时候，调用者就能够得到预期结果(即拿到了预期的返回值或者看到了预期的效果)，那么这个函数就是同步的。</p>
+                <p>"异步模式"则完全不同，每一个任务有一个或多个回调函数（callback），前一个任务结束后，不是执行后一个任务，而是执行回调函数，后一个任务则是不等前一个任务结束就执行，所以程序的执行顺序与任务的排列顺序是不一致的、异步的。</p>
+                <p>如在函数A返回的时候，调用者还不能够得到预期结果，而是需要在将来通过一定的手段得到，那么这个函数就是异步的。</p>
+                <p>其实同步和异步，无论如何，做事情的时候都是只有一条流水线（单线程），同步和异步的差别就在于这条流水线上各个流程的执行顺序不同。</p>
+                <p>下面以AJAX请求为例，来看一下同步和异步的区别：</p>
+                <ul>
+                    异步AJAX
+                    <li><b>主线程</b>：“你好，AJAX线程。请你帮我发个HTTP请求吧，我把请求地址和参数都给你了。” </li>
+                    <li><b>AJAX线程</b>：“好的，主线程。我马上去发，但可能要花点儿时间呢，你可以先去忙别的。”</li>
+                    <li><b>主线程</b>：“谢谢，你拿到响应后告诉我一声啊。”</li>
+                    <li>(接着，主线程做其他事情去了。一顿饭的时间后，它收到了响应到达的通知。)</li>
+                </ul>
+
+                <ul>
+                    同步AJAX
+                    <li><b>主线程</b>：“你好，AJAX线程。请你帮我发个HTTP请求吧，我把请求地址和参数都给你了。” </li>
+                    <li><b>AJAX线程</b>：“......”</li>
+                    <li>很久以后......</li>
+                    <li><b>AJAX线程</b>：“主线程，不好意思，我在工作的时候不能说话。你的请求已经发完了，拿到响应数据了，给你。”</li>
+                </ul>
+
+                <p>正是由于JavaScript是单线程的，而异步容易实现非阻塞，所以在JavaScript中对于耗时的操作或者时间不确定的操作，使用异步就成了必然的选择。</p>
+                <p>再举一个例子：</p>
+                <img src="https://api2.mubu.com/v3/document_image/13320969-c05c-472d-a7af-beb17a469c05-3807603.jpg">
+                <p>输出顺序是：</p>
+                <img src="https://api2.mubu.com/v3/document_image/bf57dfa5-6de3-4241-ac11-4ca089b8000c-3807603.jpg">
+                <p>可见，尽管我们设置了setTimeout（function，time）中的等待时间为0，结果其中的function还是后执行。</p>
+                <p>尽管setTimeout的time延迟时间为0，其中的function也会被放入一个队列中，等待下一个机会执行，当前的代码（指不需要加入队列中的程序）必须在该队列的程序完成之前完成，因此结果可能不与预期结果相同。</p>
+
+                <h3 id="02">异步过程的构成要素</h3>
+                <p>从上文可以看出，异步函数实际上很快就调用完成了。但是后面还有工作线程执行异步任务、通知主线程、主线程调用回调函数等很多步骤。我们把整个过程叫做异步过程。异步函数的调用在整个异步过程中，只是一小部分。</p>
+                <p>总结一下，一个异步过程通常是这样的：</p>
+                <p>主线程发起一个异步请求，相应的工作线程接收请求并告知主线程已收到(异步函数返回)；主线程可以继续执行后面的代码，同时工作线程执行异步任务；工作线程完成工作后，通知主线程；主线程收到通知后，执行一定的动作(调用回调函数)。</p>
+                <p>异步函数通常具有以下的形式：</p>
+                <img src="https://api2.mubu.com/v3/document_image/267c9d1a-49fd-48b7-aac3-49a9dea43409-3807603.jpg">
+                <p>它可以叫做异步过程的发起函数，或者叫做异步任务注册函数。args是这个函数需要的参数。callbackFn也是这个函数的参数，但是它比较特殊所以单独列出来。所以，从主线程的角度看，一个异步过程包括下面两个要素：发起函数(或叫注册函数)A和回调函数callbackFn。它们都是在主线程上调用的，其中注册函数用来发起异步过程，回调函数用来处理结果。</p>
+                <p>举个栗子</p>
+                <img src="https://api2.mubu.com/v3/document_image/86dfdebf-7869-47ee-818a-34abf77190b6-3807603.jpg">
+                <p>其中的setTimeout就是异步过程的发起函数，fn是回调函数。</p>
+                <p>注意：前面说的形式A(args..., callbackFn)只是一种抽象的表示，并不代表回调函数一定要作为发起函数的参数，例如：</p>
+                <img src="https://api2.mubu.com/v3/document_image/7028a4c8-aeae-44b6-b3fa-fbc65f8aa0ca-3807603.jpg">
+                <p>发起函数和回调函数就是分离的。</p>
+
+                <h3 id="03">消息队列和事件循环</h3>
+                <p>上文讲到，异步过程中，工作线程在异步操作完成后需要通知主线程。这个通知机制是利用消息队列和事件循环实现的。</p>
+                <p>用一句话概括：工作线程将消息放到消息队列，主线程通过事件循环过程去取消息。</p>
+                <ul>
+                    <li><b>消息队列</b>：消息队列是一个先进先出的队列，它里面存放着各种消息。</li>
+                    <li><b>事件循环</b>：事件循环是指主线程重复从消息队列中取消息、执行的过程。</li>
+                </ul>
+                <p>实际上，主线程只会做一件事情，就是从消息队列里面取消息、执行消息，再取消息、再执行。当消息队列为空时，就会等待直到消息队列变成非空。而且主线程只有在将当前的消息执行完成后，才会去取下一个消息。这种机制就叫做事件循环机制，取一个消息并执行的过程叫做一次循环。</p>
+                <p>事件循环用代码表示大概是这样的：</p>
+                <img src="https://api2.mubu.com/v3/document_image/34816bc1-f339-43a6-a77b-2e321d2b63c1-3807603.jpg">
+                <p>那么，消息队列中放的消息具体是什么东西？消息的具体结构当然跟具体的实现有关，但是为了简单起见，我们可以认为：消息就是注册异步任务时添加的回调函数。</p>
+                <p>再次以异步AJAX为例，假设存在如下的代码：</p>
+                <img src="https://api2.mubu.com/v3/document_image/e9dfc704-ce5f-4851-b384-c5766621e5a0-3807603.jpg">
+                <p>主线程在发起AJAX请求后，会继续执行其他代码。AJAX线程负责请求segmentfault.com，拿到响应后，它会把响应封装成一个JavaScript对象，然后构造一条消息：</p>
+                <img src="https://api2.mubu.com/v3/document_image/823a89ca-542b-410f-864e-d28c65ed3be2-3807603.jpg">
+                <p>其中的callbackFn就是前面代码中得到成功响应时的回调函数。</p>
+                <p>主线程在执行完当前循环中的所有代码后，就会到消息队列取出这条消息(也就是message函数)，并执行它。到此为止，就完成了工作线程对主线程的通知，回调函数也就得到了执行。如果一开始主线程就没有提供回调函数，AJAX线程在收到HTTP响应后，也就没必要通知主线程，从而也没必要往消息队列放消息。</p>
+                <p>用图表示这个过程就是：</p>
+                <img src="https://api2.mubu.com/v3/document_image/341ff838-895b-49f6-935e-2f619e5e208f-3807603.jpg">
+                <p>从上文中我们也可以得到这样一个明显的结论，就是：异步过程的回调函数，一定不在当前这一轮事件循环中执行。</p>
+
+                <h3 id="04">异步与事件</h3>
+                <p>上文中说的“事件循环”，为什么里面有个事件呢？那是因为：消息队列中的每条消息实际上都对应着一个事件。</p>
+                <p>上文中一直没有提到一类很重要的异步过程：DOM事件。举例来说：</p>
+                <img src="https://api2.mubu.com/v3/document_image/23fcf058-05c5-4434-8a4d-43d5b4c4d458-3807603.jpg">
+                <p>从事件的角度来看，上述代码表示：在按钮上添加了一个鼠标单击事件的事件监听器；当用户点击按钮时，鼠标单击事件触发，事件监听器函数被调用。</p>
+                <p>从异步过程的角度看，addEventListener函数就是异步过程的发起函数，事件监听器函数就是异步过程的回调函数。事件触发时，表示异步任务完成，会将事件监听器函数封装成一条消息放到消息队列中，等待主线程执行。</p>
+                <p>事件的概念实际上并不是必须的，事件机制实际上就是异步过程的通知机制。我觉得它的存在是为了编程接口对开发者更友好。</p>
+                <p>另一方面，所有的异步过程也都可以用事件来描述。例如：setTimeout可以看成对应一个时间到了！的事件。前文的setTimeout(fn, 1000);可以看成：</p>
+                <img src="https://api2.mubu.com/v3/document_image/e2696af9-e54b-4546-9f74-d6f2a77f4062-3807603.jpg">
+
+
+                <h3 id="05">生产者与消费者</h3>
+                <p>从生产者与消费者的角度看，异步过程是这样的：工作线程是生产者，主线程是消费者(只有一个消费者)。工作线程执行异步任务，执行完成后把对应的回调函数封装成一条消息放到消息队列中；主线程不断地从消息队列中取消息并执行，当消息队列空时主线程阻塞，直到消息队列再次非空。</p>
+
+                <h3 id="06">总结</h3>
+                <p>最后再用一个生活中的例子总结一下同步和异步：在公路上，汽车一辆接一辆，有条不紊的运行。这时，有一辆车坏掉了。假如它停在原地进行修理，那么后面的车就会被堵住没法行驶，交通就乱套了。幸好旁边有应急车道，可以把故障车辆推到应急车道修理，而正常的车流不会受到任何影响。等车修好了，再从应急车道回到正常车道即可。唯一的影响就是，应急车道用多了，原来的车辆之间的顺序会有点乱。</p>
+                <p>这就是同步和异步的区别。同步可以保证顺序一致，但是容易导致阻塞；异步可以解决阻塞问题，但是会改变顺序性。改变顺序性其实也没有什么大不了的，只不过让程序变得稍微难理解了一些 :)</p>
+                <p>PS：ECMAScript 262规范中，并没有对异步、事件队列等概念及其实现的描述。这些都是具体的JavaScript运行时环境使用的机制。本文重点是描述异步过程的原理，为了便于理解做了很多简化。所以文中的某些术语的使用可能是不准确的，具体细节也未必是正确的，例如消息队列中消息的结构。请读者注意。</p>
+
+                <h3 id="07">参考链接</h3>
+                <p><a href="https://segmentfault.com/a/1190000004322358" style="color: #0000005b;">JavaScript：彻底理解同步、异步和事件循环(Event Loop)</a></p>
+                <p><a href="https://segmentfault.com/a/1190000017996968" style="color: #0000005b;">JS基础——同步异步的区别</a></p>
+                <p><a href="https://m.html.cn/qa/javascript/11387.html" style="color: #0000005b;">javascript同步和异步的区别是什么？</a></p>
+                <br><br><br>
+            </td>
+            <td style="background-color:#fff;width:5%;vertical-align:top;"></td>
+            <td style="background-color:#eeeeee;width:3%;vertical-align:top;"></td>
+            <td style="background-color:#eeeeee;width:17%;vertical-align:top;">
+                <div id="cata">
+                    <br>目录<br>
+                    <hr>
+                    <ul>
+                        <b><li><a href="#00"  >单线程是什么</a></li></b>
+                        <b><li><a href="#01"  >同步和异步</a></li></b>
+                        <b><li><a href="#02"  >异步过程的构成要素</a></li></b>
+                        <b><li><a href="#03"  >消息队列和事件循环</a></li></b>
+                        <b><li><a href="#04"  >异步与事件</a></li></b>
+                        <b><li><a href="#05"  >生产者与消费者</a></li></b>
+                        <b><li><a href="#06"  >总结</a></li></b>
+                        <b><li><a href="#07"  >参考链接</a></li></b>
+                    </ul>
+                </div>
+            </td>
+            <td style="background-color:#eeeeee;width:10%;vertical-align:top;"></td>
+        </tr>
+        <tr>
+            <!--备案-->
+            <td colspan="7" style="background-color:#eeeeee;text-align:center;height: 50px;">
+                <h5>
+                    Made by <a href="http://nev.wangyuelin.xyz">YuelinWang.</a>
+                    <a href="http://www.beian.miit.gov.cn/"> | 黑ICP备20002479号</a><br><br>
+                    <a href="https://github.com/YuelinWang/blog_index" style="text-decoration: none;color: #000000;">想使用此模板请点此</a>
+                </h5>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
