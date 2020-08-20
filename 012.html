@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>什么是防抖和节流？有什么区别？如何实现？</title>
+    <link rel="stylesheet" href="css/blog_wyl.css">
+    <link rel="shortcut icon" href="http://nev.wangyuelin.xyz/static/img/favicon.ico" />
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+    <table width="100%" border="0" cellspacing="0px">
+        <!--可以这么理解，一共四行七列，头、隔断、内容、版权各一行
+            左右两个边框、内容目录各一列，内容与目录间隔一列、内容左右留白两列
+            对照看colspan应该就能看懂-->
+        <tr>
+            <td colspan="1" style="background-color:#fff;height: 50px;"></td>
+            <td colspan="2" style="background-color:#fff;height: 50px;">
+                <!--返回上一页的链接-->
+                <a href="http://nev.wangyuelin.xyz/#/Message">
+                    <button>返回上一页</button>
+                </a>
+            </td>
+            <td colspan="3" style="background-color:#fff;height: 50px;" align="right">
+                <!--主页-->
+                <a href="http://www.wangyuelin.xyz">
+                    <button>进入主站</button>
+                </a>
+            </td>
+            <td colspan="1" style="background-color:#fff;height: 50px;"></td>
+        </tr>
+
+
+        <tr>
+            <td colspan="7" style="background-color:#eeeeee;height: 50px;"></td>
+        </tr>
+
+        <tr>
+            <td style="background-color:#eeeeee;width:10%;vertical-align:top;"></td>
+            <td style="background-color:#fff;width:5%;vertical-align:top;"></td>
+            <!--文章-->
+            <td style="background-color:#fff;width:50%;vertical-align:top;">
+                <br>
+                <h1>&nbsp;&nbsp;&nbsp;&nbsp;什么是防抖和节流？有什么区别？如何实现？</h1>
+                <hr>
+                <div id="data">
+                    <div>
+                        <p>2020年08月20日</p>
+                    </div>
+                </div>
+                <h3 id="00">防抖概念与解决方法</h3>
+                <p>在一个ajax中，我们只要按下键盘，就会触发ajax请求。不仅从资源上来说是很浪费的行为，而且实际应用中，用户也是输出完整的字符后，才会请求。</p>
+                <p>所以我们有了<b>函数防抖(debounce)</b>这个概念，说的是在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时。</p>
+                <p>思路是每次触发事件时都取消之前的延时调用方法。代码如下：</p>
+                <img src="https://api2.mubu.com/v3/document_image/d84c7c56-1bba-4f69-9684-460457e637d3-3807603.jpg" style="width: 100%;">
+                <p>我们加入了防抖以后，当你在频繁的输入时，并不会发送请求，只有当你在指定间隔内没有输入时，才会执行函数。如果停止输入但是在指定间隔内又输入，会重新触发计时。</p>
+                <h3 id="01">节流概念与解决方法</h3>
+                <p><b>节流函数</b>：说的是规定在一个单位时间内，只能触发一次函数。如果这个单位时间内触发多次函数，只有一次生效。</p>
+                <p>思路是每次触发事件时都判断当前是否有等待执行的延时函数。代码如下：</p>
+                <img src="https://api2.mubu.com/v3/document_image/329c459f-54f1-4653-9f90-9384ff69d703-3807603.jpg" style="width: 100%;">
+                <h3 id="02">总结</h3>
+                <p>
+                    <ul>
+                        <li>函数防抖和函数节流都是防止某一时间频繁触发，但是这两兄弟之间的原理却不一样。</li>
+                        <li>函数防抖是某一段时间内只执行一次，而函数节流是间隔时间执行。</li>
+                    </ul>
+                </p>
+                <p>应用场景：
+                    <ul>
+                        <b>debounce：</b>
+                        <li>search搜索联想，用户在不断输入值时，用防抖来节约请求资源。</li>
+                        <li>window触发resize的时候，不断的调整浏览器窗口大小会不断的触发这个事件，用防抖来让其只触发一次</li>
+                    </ul>
+                    <ul>
+                        <b>throttle：</b>
+                        <li>鼠标不断点击触发，mousedown(单位时间内只触发一次)</li>
+                        <li>监听滚动事件，比如是否滑到底部自动加载更多，用throttle来判断</li>
+                    </ul>
+                </p>
+
+                <h3 id="03">参考链接</h3>
+                <p><a href="https://juejin.im/post/6844903669389885453" style="color: #0000005b;">7分钟理解JS的节流、防抖及使用场景</a></p>
+                <p><a href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/5" style="color: #0000005b;">第 3 题：什么是防抖和节流？有什么区别？如何实现？</a></p>
+                <br><br><br>
+            </td>
+            <td style="background-color:#fff;width:5%;vertical-align:top;"></td>
+            <td style="background-color:#eeeeee;width:3%;vertical-align:top;"></td>
+            <td style="background-color:#eeeeee;width:17%;vertical-align:top;">
+                <div id="cata">
+                    <br>目录<br>
+                    <hr>
+                    <ul>
+                        <b><li><a href="#00"  >防抖概念与解决方法</a></li></b>
+                        <b><li><a href="#01"  >节流概念与解决方法</a></li></b>
+                        <b><li><a href="#02"  >总结</a></li></b>
+                        <b><li><a href="#03"  >参考链接</a></li></b>
+                    </ul>
+                </div>
+            </td>
+            <td style="background-color:#eeeeee;width:10%;vertical-align:top;"></td>
+        </tr>
+        <tr>
+            <!--备案-->
+            <td colspan="7" style="background-color:#eeeeee;text-align:center;height: 50px;">
+                <h5>
+                    Made by <a href="http://nev.wangyuelin.xyz">YuelinWang.</a>
+                    <a href="http://www.beian.miit.gov.cn/"> | 黑ICP备20002479号</a><br><br>
+                    <a href="https://github.com/YuelinWang/blog_index" style="text-decoration: none;color: #000000;">想使用此模板请点此</a> |
+                    <a href="https://github.com/YuelinWang/blog_index/blob/master/code/012.js" style="text-decoration: none;color: #000000;">想访问代码请点此</a>
+                </h5>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
